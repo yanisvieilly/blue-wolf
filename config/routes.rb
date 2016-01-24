@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :questions, only: %i(index create)
+  resources :questions, only: %i(new create)
 
   root 'questions#index'
 end

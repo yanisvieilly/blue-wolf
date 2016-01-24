@@ -1,0 +1,7 @@
+h1 Questions
+
+= form_for @question, remote: true do |f|
+  .form-group
+    = f.label :title, 'Nouvelle question'
+    = f.text_field :title, placeholder: 'Rédigez votre question ici...', class: 'form-control'
+  = f.submit 'Ajouter', class: 'btn btn-default'

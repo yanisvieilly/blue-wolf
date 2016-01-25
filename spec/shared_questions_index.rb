@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 shared_examples_for 'a questions index' do
+  fixtures :all
+
   describe 'GET #index' do
     before { get :index }
 
@@ -8,10 +10,8 @@ shared_examples_for 'a questions index' do
     it { is_expected.to render_template 'index' }
 
     describe '@questions' do
-      let(:questions) { [Question.create(title: 'question title')] }
-
       it 'matches the questions from the database' do
-        expect(assigns(:questions)).to match_array questions
+        expect(assigns(:questions)).to match_array Question.all
       end
     end
   end

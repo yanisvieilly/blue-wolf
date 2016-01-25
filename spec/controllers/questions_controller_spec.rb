@@ -14,4 +14,16 @@ describe QuestionsController do
       end
     end
   end
+
+  describe 'GET #new' do
+    before { get :new }
+
+    it { is_expected.to render_template 'new' }
+
+    describe '@question' do
+      it 'sets up a new question' do
+        expect(assigns(:question)).to be_a_new Question
+      end
+    end
+  end
 end

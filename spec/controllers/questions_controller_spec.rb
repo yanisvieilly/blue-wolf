@@ -4,6 +4,7 @@ describe QuestionsController do
   describe 'GET #index' do
     before { get :index }
 
+    it { is_expected.to respond_with :success }
     it { is_expected.to render_template 'index' }
 
     describe '@questions' do
@@ -18,6 +19,7 @@ describe QuestionsController do
   describe 'GET #new' do
     before { get :new }
 
+    it { is_expected.to respond_with :success }
     it { is_expected.to render_template 'new' }
 
     describe '@question' do

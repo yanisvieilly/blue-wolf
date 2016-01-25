@@ -1,1 +1,16 @@
 h1 Restitution
+
+- @questions.each do |question|
+  h3 = question.title
+  table
+    thead
+      th
+        td Date
+        td ID
+        td Réponse
+    tbody
+      - question.answers.order(created_at: :desc).each do |answer|
+        tr
+          td = answer.created_at
+          td = answer.id
+          td = answer.value

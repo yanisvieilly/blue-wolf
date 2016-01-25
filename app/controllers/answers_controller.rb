@@ -2,6 +2,7 @@ class AnswersController < ApplicationController
   before_action :check_answers, only: :create
 
   def index
+    @questions = Question.includes(:answers)
   end
 
   def create

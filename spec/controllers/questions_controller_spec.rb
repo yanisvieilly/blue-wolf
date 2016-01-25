@@ -28,4 +28,28 @@ describe QuestionsController do
       end
     end
   end
+
+  describe 'POST #create' do
+    let(:question_params) { { question: { title: 'a question title' } } }
+    let(:invalid_question_params) { { question: { title: '' } } }
+
+    it do
+      is_expected
+        .to permit(:title)
+        .for(:create, params: question_params)
+        .on(:question)
+    end
+
+    context 'when parameters are invalid' do
+      before { post :create, invalid_question_params }
+
+      it { is_expected.to respond_with :unprocessable_entity }
+    end
+
+    context 'when parameters are valid' do
+      before { post :create, question_params }
+
+      it { is_expected.to respond_with :created }
+    end
+  end
 end

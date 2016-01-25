@@ -1,4 +1,6 @@
 class AnswersController < ApplicationController
+  before_action :check_answers, on: :create
+
   def index
   end
 
@@ -20,5 +22,12 @@ class AnswersController < ApplicationController
 
   def answer_params(answer)
     answer.permit(:value)
+  end
+
+  def check_answers
+    unless params['answers']
+      render json: { value: ['none of the questions were answered'] },
+             status: :unprocessable_entity
+    end
   end
 end

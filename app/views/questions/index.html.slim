@@ -1,6 +1,6 @@
 h1 Questions
 
-= form_tag answers_path, remote: true do
+= form_tag answers_path, remote: true, class: 'new_answers' do
   - @questions.each_with_index do |question, i|
     = fields_for 'answers[]', question.answers.build, index: question.id do |answer|
       .form-group

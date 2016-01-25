@@ -5,15 +5,31 @@ describe AnswersController do
   it_behaves_like 'a questions index'
 
   describe 'POST #create' do
+    let(:questions) do
+      [
+        Question.create(title: 'question title'),
+        Question.create(title: 'another question title')
+      ]
+    end
+
     it { is_expected.to use_before_action(:check_answers) }
 
-    context 'when parameters are valid' do
-      let(:questions) do
-        [
-          Question.create(title: 'question title'),
-          Question.create(title: 'another question title')
-        ]
+    context 'when parameters are invalid' do
+      let(:invalid_params) do
+        {
+          answers: {
+            "#{questions.first.id}" => { value: 'not an integer' },
+            "#{questions.last.id}" => { value: '-128' }
+          }
+        }
       end
+
+      before { post :create, invalid_params }
+
+      it { is_expected.to respond_with :unprocessable_entity }
+    end
+
+    context 'when parameters are valid' do
       let(:valid_params) do
         {
           answers: {

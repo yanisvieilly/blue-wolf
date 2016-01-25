@@ -47,9 +47,16 @@ describe QuestionsController do
     end
 
     context 'when parameters are valid' do
-      before { post :create, question_params }
+      describe 'response' do
+        before { post :create, question_params }
 
-      it { is_expected.to respond_with :created }
+        it { is_expected.to respond_with :created }
+      end
+
+      it 'creates a new question' do
+        expect { post :create, question_params }
+          .to change { Question.count }.by 1
+      end
     end
   end
 end

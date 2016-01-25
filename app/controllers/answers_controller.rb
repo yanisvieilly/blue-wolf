@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  before_action :check_answers, on: :create
+  before_action :check_answers, only: :create
 
   def index
   end

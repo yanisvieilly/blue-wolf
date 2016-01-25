@@ -4,10 +4,10 @@ h1 Restitution
   h3 = question.title
   table.table
     thead
-      th
-        td Date
-        td ID
-        td Réponse
+      tr
+        th Date
+        th ID
+        th Réponse
     tbody
       - question.answers.order(created_at: :desc).each do |answer|
         tr

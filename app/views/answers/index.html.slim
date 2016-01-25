@@ -9,7 +9,7 @@ h1 Restitution
         th ID
         th Réponse
     tbody
-      - question.answers.order(created_at: :desc).each do |answer|
+      - question.answers.each do |answer|
         tr
           td = answer.created_at
           td = answer.id

@@ -2,24 +2,19 @@ require 'rails_helper'
 require 'shared_questions_index'
 
 describe AnswersController do
+  fixtures :all
+
   it_behaves_like 'a questions index'
 
   describe 'POST #create' do
-    let(:questions) do
-      [
-        Question.create(title: 'question title'),
-        Question.create(title: 'another question title')
-      ]
-    end
-
     it { is_expected.to use_before_action(:check_answers) }
 
     context 'when parameters are invalid' do
       let(:invalid_params) do
         {
           answers: {
-            "#{questions.first.id}" => { value: 'not an integer' },
-            "#{questions.last.id}" => { value: '-128' }
+            "#{questions(:one).id}" => { value: 'not an integer' },
+            "#{questions(:two).id}" => { value: '-128' }
           }
         }
       end
@@ -33,8 +28,8 @@ describe AnswersController do
       let(:valid_params) do
         {
           answers: {
-            "#{questions.first.id}" => { value: '4' },
-            "#{questions.last.id}" => { value: '9' }
+            "#{questions(:one).id}" => { value: '4' },
+            "#{questions(:two).id}" => { value: '9' }
           }
         }
       end

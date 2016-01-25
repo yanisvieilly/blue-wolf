@@ -2,11 +2,11 @@ h1 Questions
 
 = form_tag answers_path, remote: true do
   - @questions.each_with_index do |question, i|
-    .form-group
-      h3 = question.title
-      = hidden_field_tag "answers[#{i}][question_id]", question.id
-      - (0..10).each do |number|
-        label.radio-inline
-          = radio_button_tag "answers[#{i}][value]", number
-          =< number
+    = fields_for 'answers[]', question.answers.build, index: question.id do |answer|
+      .form-group
+        h3 = question.title
+        - (0..10).each do |number|
+          label.radio-inline
+            = answer.radio_button :value, number
+            =< number
   = submit_tag 'Valider', class: 'btn btn-default'
